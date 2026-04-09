@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Felton's Dissertation Research Hub</title>
+    <title>Dissertation Research Hub</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     
     <style>
@@ -23,11 +23,12 @@
         body { font-family: 'DM Sans', sans-serif; background: var(--cream-bg); color: var(--text); min-height: 100vh; }
 
         header { background: var(--royal-blue); color: var(--white); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold-bright); box-shadow: 0 2px 15px rgba(0,0,0,0.1); }
-        .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; }
-        .header-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; letter-spacing: 0.02em; }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; }
+        .header-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; letter-spacing: 0.02em; }
         
-        .btn { padding: 8px 16px; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; font-family: inherit; }
-        .btn-gold { background: var(--gold-bright); color: var(--royal-blue); font-weight: 700; }
+        .nav-buttons { display: flex; gap: 10px; align-items: center; }
+        .btn { padding: 8px 16px; border: none; border-radius: 4px; font-size: 0.75rem; cursor: pointer; transition: 0.2s; font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; }
+        .btn-gold { background: var(--gold-bright); color: var(--royal-blue); font-weight: 800; text-transform: uppercase; }
         .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.4); }
 
         .main-layout { display: grid; grid-template-columns: 450px 1fr; gap: 0; min-height: calc(100vh - 75px); }
@@ -41,13 +42,11 @@
         #searchBar { width: 100%; padding: 10px 15px; border-radius: 20px; border: 2px solid var(--border); font-family: inherit; margin-bottom: 15px; outline: none; }
         #searchBar:focus { border-color: var(--gold-bright); background: white; }
 
-        #otherTypeContainer { display: none; margin-top: -10px; margin-bottom: 14px; }
-
         .lens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 5px; background: #f0f4f8; padding: 10px; border-radius: 8px; }
         .lens-option { font-size: 0.75rem; display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 500; }
 
         .note-card { background: white; border: 1px solid var(--border); padding: 22px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border-left: 5px solid var(--royal-blue); position: relative; }
-        .delete-note-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #ccc; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+        .delete-note-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #ccc; cursor: pointer; font-size: 1.2rem; }
         .delete-note-btn:hover { color: #cc0000; }
         
         .note-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; padding-right: 20px; }
@@ -55,8 +54,8 @@
         .note-source { font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--royal-blue); font-size: 1.3rem; }
         .note-quote { background: #f0f4f8; border-left: 3px solid var(--gold-bright); padding: 14px; font-style: italic; margin: 12px 0; font-size: 0.95rem; color: #334455; line-height: 1.5; }
         
-        .pill { display: inline-block; background: rgba(0, 35, 102, 0.08); color: var(--royal-blue); font-size: 0.65rem; padding: 2px 10px; border-radius: 4px; margin-right: 6px; margin-top: 10px; font-weight: 700; border: 1px solid rgba(0, 35, 102, 0.1); }
-        .link-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 0.8rem; color: var(--royal-blue); text-decoration: none; font-weight: 700; padding: 6px 12px; background: #FFF9E6; border: 1px solid var(--gold-bright); border-radius: 6px; transition: 0.2s; }
+        .pill { display: inline-block; background: rgba(0, 35, 102, 0.08); color: var(--royal-blue); font-size: 0.65rem; padding: 2px 10px; border-radius: 4px; margin-right: 6px; margin-top: 10px; font-weight: 700; }
+        .link-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 0.8rem; color: var(--royal-blue); text-decoration: none; font-weight: 700; padding: 6px 12px; background: #FFF9E6; border: 1px solid var(--gold-bright); border-radius: 6px; }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,35,102,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.open { display: flex; }
@@ -70,10 +69,11 @@
 <header>
     <div class="header-inner">
         <div class="header-title">
-            <h1>✦ Dissertation Research Hub</h1>
+            <h1>✦ Dissertation Hub</h1>
         </div>
-        <div>
-            <button class="btn btn-outline" onclick="openExport()">Data Backup</button>
+        <div class="nav-buttons">
+            <a href="PASTE_YOUR_GOOGLE_DRIVE_URL_HERE" target="_blank" class="btn btn-gold">📂 Access Master Files</a>
+            <button class="btn btn-outline" onclick="openExport()">Sync/Backup</button>
         </div>
     </div>
 </header>
@@ -93,9 +93,9 @@
             </select>
         </div>
 
-        <div class="form-group" id="otherTypeContainer">
+        <div class="form-group" id="otherTypeContainer" style="display:none;">
             <label>Specify Type</label>
-            <input type="text" id="otherTypeInput" placeholder="e.g., Podcast, Guest Lecture">
+            <input type="text" id="otherTypeInput" placeholder="e.g., Podcast">
         </div>
 
         <div class="form-group">
@@ -109,7 +109,7 @@
         </div>
 
         <div class="form-group">
-            <label>Resource Link (YouTube, Drive, etc.)</label>
+            <label>Resource Link</label>
             <input type="url" id="externalLink" placeholder="https://...">
         </div>
 
@@ -154,19 +154,20 @@
 
 <div class="modal-overlay" id="modal">
     <div class="modal">
-        <h3 style="color: var(--royal-blue)">System Backup</h3>
-        <p style="font-size:0.8rem; color:var(--muted); margin: 10px 0;">Backup your JSON data here regularly.</p>
-        <textarea style="width:100%; height:200px; padding:10px; font-family:monospace; font-size:0.8rem;" id="exportContent" readonly></textarea>
-        <div style="display:flex; gap:10px; margin-top:15px">
-            <button class="btn btn-gold" onclick="copyData()">Copy Text</button>
+        <h3 style="color: var(--royal-blue)">Data Sync / Backup</h3>
+        <p style="font-size:0.8rem; color:var(--muted); margin: 10px 0;">To sync between computers: Copy this text, save it to your Drive, and paste it here on your other computer.</p>
+        <textarea style="width:100%; height:150px; padding:10px; font-family:monospace; font-size:0.75rem;" id="exportContent"></textarea>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:15px">
+            <button class="btn btn-gold" onclick="copyData()">Copy All</button>
+            <button class="btn" style="background:var(--royal-blue); color:white" onclick="importData()">Import from Text</button>
             <button class="btn" style="background:#eee" onclick="closeModal()">Close</button>
-            <button class="btn" style="color:red; font-size:0.7rem" onclick="clearData()">Wipe All Data</button>
+            <button class="btn" style="color:red; font-size:0.7rem; margin-left:auto" onclick="clearData()">Wipe All</button>
         </div>
     </div>
 </div>
 
 <script>
-    let notes = JSON.parse(localStorage.getItem('diss_final_v6')) || [];
+    let notes = JSON.parse(localStorage.getItem('diss_final_v7')) || [];
 
     function toggleOtherType() {
         const typeSelect = document.getElementById('type');
@@ -177,11 +178,8 @@
     function saveNote() {
         const author = document.getElementById('author').value;
         if(!author) return alert("Please enter a source name.");
-        
         let finalType = document.getElementById('type').value;
-        if(finalType === 'Other') {
-            finalType = document.getElementById('otherTypeInput').value || 'Other';
-        }
+        if(finalType === 'Other') finalType = document.getElementById('otherTypeInput').value || 'Other';
 
         const note = {
             id: Date.now(),
@@ -195,7 +193,7 @@
             date: new Date().toLocaleDateString()
         };
         notes.unshift(note);
-        localStorage.setItem('diss_final_v6', JSON.stringify(notes));
+        localStorage.setItem('diss_final_v7', JSON.stringify(notes));
         renderNotes();
         clearForm();
     }
@@ -203,7 +201,7 @@
     function deleteNote(id) {
         if(confirm("Permanently delete this entry?")) {
             notes = notes.filter(n => n.id !== id);
-            localStorage.setItem('diss_final_v6', JSON.stringify(notes));
+            localStorage.setItem('diss_final_v7', JSON.stringify(notes));
             renderNotes();
         }
     }
@@ -211,22 +209,18 @@
     function renderNotes() {
         const query = document.getElementById('searchBar').value.toLowerCase();
         const container = document.getElementById('notesContainer');
-        
         const filteredNotes = notes.filter(n => {
             const content = `${n.author} ${n.title} ${n.quote} ${n.meaning} ${n.lenses.join(' ')} ${n.type}`.toLowerCase();
             return content.includes(query);
         });
-
         document.getElementById('count').innerText = `${filteredNotes.length} MATCHES`;
-        
         container.innerHTML = filteredNotes.map(n => {
             let linkLabel = "View Resource";
             if (n.link.includes('youtube.com') || n.link.includes('youtu.be')) linkLabel = "▶ Watch YouTube";
             if (n.link.includes('drive.google.com')) linkLabel = "📄 View in Drive";
-            
             return `
             <div class="note-card">
-                <button class="delete-note-btn" onclick="deleteNote(${n.id})" title="Delete entry">×</button>
+                <button class="delete-note-btn" onclick="deleteNote(${n.id})">×</button>
                 <div class="note-header">
                     <span class="note-type-tag">${n.type}</span>
                     <span style="font-size:0.7rem; color:var(--muted); font-weight:700">${n.date}</span>
@@ -234,12 +228,10 @@
                 <div class="note-source">${n.author}${n.title ? ': ' + n.title : ''}</div>
                 ${n.link ? `<a href="${n.link}" target="_blank" class="link-badge">${linkLabel} ↗</a>` : ''}
                 ${n.quote ? `<div class="note-quote">"${n.quote}"</div>` : ''}
-                <div style="font-size:0.9rem; margin-top:12px; line-height:1.6">
-                    <strong style="color:var(--royal-blue)">Analysis:</strong> ${n.meaning}
-                </div>
+                <div style="font-size:0.9rem; margin-top:12px; line-height:1.6"><strong style="color:var(--royal-blue)">Analysis:</strong> ${n.meaning}</div>
                 <div>${n.lenses.map(l => `<span class="pill">${l}</span>`).join('')}</div>
-            </div>
-        `}).join('');
+            </div>`;
+        }).join('');
     }
 
     function clearForm() {
@@ -257,12 +249,24 @@
     function copyData() {
         document.getElementById('exportContent').select();
         document.execCommand('copy');
-        alert("Backup copied!");
+        alert("Backup copied to clipboard!");
+    }
+    function importData() {
+        try {
+            const data = JSON.parse(document.getElementById('exportContent').value);
+            if(confirm("This will overwrite your current notes with the imported list. Proceed?")) {
+                notes = data;
+                localStorage.setItem('diss_final_v7', JSON.stringify(notes));
+                renderNotes();
+                closeModal();
+                alert("Import successful!");
+            }
+        } catch(e) { alert("Invalid data. Please paste the backup text correctly."); }
     }
     function clearData() {
         if(confirm("Wipe all data?")) {
             notes = [];
-            localStorage.removeItem('diss_final_v6');
+            localStorage.removeItem('diss_final_v7');
             renderNotes();
             closeModal();
         }
