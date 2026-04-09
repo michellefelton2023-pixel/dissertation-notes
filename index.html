@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dissertation Note Taker — Women & Leadership Identity</title>
+    <title>Dissertation Note Taker â€” Women & Leadership Identity</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
 
@@ -160,7 +160,7 @@
     <div class="header-inner">
         <div class="header-title">
             <h1>? Dissertation Reading Notes</h1>
-            <p>Women's Leadership Identity · Agency · Intersectionality</p>
+            <p>Women's Leadership Identity Â· Agency Â· Intersectionality</p>
         </div>
         <div class="header-actions">
             <button class="btn btn-outline" onclick="openExport()">Export Notes</button>
@@ -182,9 +182,9 @@
 
         <div class="prompts-box hidden" id="promptsBox">
             <ul style="list-style:none; font-size:0.8rem; line-height:1.6">
-                <li>• What does this say about women navigating institutions not built for them?</li>
-                <li>• Where do you see leadership identity being formed or resisted?</li>
-                <li>• How could this appear in your literature review?</li>
+                <li>â€¢ What does this say about women navigating institutions not built for them?</li>
+                <li>â€¢ Where do you see leadership identity being formed or resisted?</li>
+                <li>â€¢ How could this appear in your literature review?</li>
             </ul>
         </div>
 
@@ -275,7 +275,7 @@
         document.getElementById('count').innerText = notes.length;
         container.innerHTML = notes.map(n => `
             <div class="note-card">
-                <div class="note-source">${n.author} ${n.title ? ' — ' + n.title : ''}</div>
+                <div class="note-source">${n.author} ${n.title ? ' â€” ' + n.title : ''}</div>
                 ${n.quote ? `<div class="note-quote">"${n.quote}"</div>` : ''}
                 <div style="font-size:0.8rem; margin-top:8px"><strong>Analysis:</strong> ${n.meaning}</div>
                 <div style="margin-top:10px">
