@@ -3,155 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dissertation Note Taker — Women & Leadership Identity</title>
+    <title>Dissertation Research Hub</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
 
         :root {
-            --berry: #6D2E46;
-            --berry-deep: #4A1F30;
-            --berry-light: #8B3D58;
-            --rose: #A26769;
-            --cream: #F5EFE6;
-            --cream-dark: #EDE4D6;
+            --royal-blue: #002366;
+            --royal-deep: #001a4d;
+            --royal-light: #003399;
             --gold: #C4956A;
-            --gold-light: #D9B48F;
-            --dark: #2B1B20;
-            --text: #3D2830;
-            --muted: #8A6E76;
-            --white: #FDFAF6;
-            --lens1: #6D2E46;
-            --lens2: #2C5F5F;
-            --lens3: #5C4A1E;
-            --lens4: #2E3A6D;
-            --lens5: #4A2C5F;
+            --gold-bright: #D4AF37;
+            --cream-bg: #F8F9FA;
+            --border: #DDE2E8;
+            --text: #1A1A1A;
+            --muted: #5A6675;
+            --white: #FFFFFF;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--cream-bg); color: var(--text); min-height: 100vh; }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--cream);
-            color: var(--text);
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(ellipse at 10% 20%, rgba(109,46,70,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 90% 80%, rgba(196,149,106,0.08) 0%, transparent 60%);
-        }
-
-        /* --- HEADER --- */
-        header {
-            background: var(--berry-deep);
-            color: var(--cream);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(43,27,32,0.3);
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 28px;
-            gap: 20px;
-        }
-
-        .header-title h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--white);
-        }
-
-        .header-title p {
-            font-size: 0.72rem;
-            color: var(--gold-light);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .btn-gold { background: var(--gold); color: var(--dark); }
-        .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-        .btn-outline { background: transparent; color: var(--cream); border: 1px solid rgba(245,239,230,0.3); }
-        .btn-danger { background: transparent; color: #ff8e8e; border: 1px solid #ff8e8e; }
-
-        .rq-banner {
-            background: linear-gradient(135deg, var(--berry) 0%, var(--berry-light) 100%);
-            padding: 12px 28px;
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .rq-banner p { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic; color: var(--white); }
-        .rq-banner span { font-size: 0.7rem; color: var(--gold-light); text-transform: uppercase; margin-right: 10px; font-weight: 600; }
-
-        /* --- MAIN LAYOUT --- */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 0;
-            min-height: calc(100vh - 140px);
-        }
-
-        .entry-panel { padding: 28px; border-right: 1px solid var(--cream-dark); }
-        .notes-panel { background: var(--white); padding: 22px 20px; overflow-y: auto; max-height: calc(100vh - 140px); }
-
-        .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
-        label { font-size: 0.72rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+        header { background: var(--royal-blue); color: var(--white); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold-bright); box-shadow: 0 2px 15px rgba(0,0,0,0.1); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; }
+        .header-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; letter-spacing: 0.02em; }
         
-        input, textarea {
-            padding: 10px;
-            border: 1.5px solid var(--cream-dark);
-            border-radius: 6px;
-            font-family: 'DM Sans', sans-serif;
-            background: var(--white);
-        }
+        .btn { padding: 8px 16px; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; font-family: inherit; }
+        .btn-gold { background: var(--gold-bright); color: var(--royal-blue); font-weight: 700; }
+        .btn-gold:hover { background: #eac04d; transform: translateY(-1px); }
+        .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.4); }
 
-        .prompts-box {
-            background: rgba(109,46,70,0.05);
-            border-left: 3px solid var(--gold);
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        .hidden { display: none; }
+        .main-layout { display: grid; grid-template-columns: 450px 1fr; gap: 0; min-height: calc(100vh - 75px); }
+        .entry-panel { padding: 25px; border-right: 1px solid var(--border); background: var(--white); overflow-y: auto; max-height: calc(100vh - 75px); }
+        .notes-panel { padding: 25px; overflow-y: auto; max-height: calc(100vh - 75px); }
 
-        /* --- NOTE CARDS --- */
-        .note-card {
-            background: white;
-            border: 1px solid var(--cream-dark);
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .note-source { font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--berry); font-size: 1.1rem; }
-        .note-quote { background: rgba(109,46,70,0.03); border-left: 2px solid var(--rose); padding: 10px; font-style: italic; margin: 10px 0; font-size: 0.85rem; }
-        .note-lens-pill { font-size: 0.6rem; padding: 2px 8px; border-radius: 10px; margin-right: 4px; background: var(--cream); font-family: 'DM Mono', monospace; }
-
-        /* --- MODAL --- */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(43,27,32,0.8);
-            display: none; align-items: center; justify-content: center; z-index: 200;
-        }
+        .form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+        label { font-size: 0.7rem; text-transform: uppercase; color: var(--royal-blue); font-weight: 800; letter-spacing: 0.06em; }
+        input, textarea, select { padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; background: var(--cream-bg); }
+        input:focus, textarea:focus { outline: 2px solid var(--gold-bright); border-color: transparent; }
+        
+        .note-card { background: white; border: 1px solid var(--border); padding: 22px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border-left: 5px solid var(--royal-blue); }
+        .note-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .note-type-tag { font-size: 0.65rem; background: var(--royal-blue); color: var(--white); padding: 3px 10px; border-radius: 3px; text-transform: uppercase; font-weight: 600; }
+        .note-source { font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--royal-blue); font-size: 1.3rem; }
+        .note-quote { background: #f0f4f8; border-left: 3px solid var(--gold-bright); padding: 14px; font-style: italic; margin: 12px 0; font-size: 0.95rem; color: #334455; }
+        .link-badge { display: inline-block; margin-top: 10px; font-size: 0.75rem; color: var(--royal-blue); text-decoration: none; font-weight: 700; padding: 4px 8px; background: rgba(212, 175, 55, 0.1); border-radius: 4px; }
+        
+        .pill { display: inline-block; border: 1px solid var(--gold-bright); color: var(--royal-blue); font-size: 0.65rem; padding: 2px 10px; border-radius: 4px; margin-right: 6px; margin-top: 10px; font-weight: 600; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,35,102,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.open { display: flex; }
-        .modal { background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; }
-        .export-area { width: 100%; height: 200px; font-family: 'DM Mono', monospace; font-size: 0.8rem; margin: 15px 0; }
+        .modal { background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; border-top: 10px solid var(--gold-bright); }
 
-        @media (max-width: 900px) {
-            .main-layout { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } .entry-panel { border-right: none; max-height: none; } }
     </style>
 </head>
 <body>
@@ -159,135 +61,132 @@
 <header>
     <div class="header-inner">
         <div class="header-title">
-            <h1>? Dissertation Reading Notes</h1>
-            <p>Women's Leadership Identity · Agency · Intersectionality</p>
+            <h1>✦ Dissertation Research Hub</h1>
         </div>
-        <div class="header-actions">
-            <button class="btn btn-outline" onclick="openExport()">Export Notes</button>
-            <button class="btn btn-gold" onclick="document.getElementById('entryPanel').scrollIntoView()">+ New Note</button>
+        <div>
+            <button class="btn btn-outline" onclick="openExport()">Data Backup</button>
         </div>
-    </div>
-    <div class="rq-banner">
-        <p><span>Research Question</span> How do women develop leadership identities and exercise agency within structured institutions while navigating gendered expectations?</p>
     </div>
 </header>
 
 <div class="main-layout">
-    <div class="entry-panel" id="entryPanel">
+    <div class="entry-panel">
         <div class="form-group">
-            <button class="btn" style="text-align:left; color:var(--gold); padding:0" onclick="document.getElementById('promptsBox').classList.toggle('hidden')">
-                Show/Hide Guiding Prompts ?
-            </button>
-        </div>
-
-        <div class="prompts-box hidden" id="promptsBox">
-            <ul style="list-style:none; font-size:0.8rem; line-height:1.6">
-                <li>• What does this say about women navigating institutions not built for them?</li>
-                <li>• Where do you see leadership identity being formed or resisted?</li>
-                <li>• How could this appear in your literature review?</li>
-            </ul>
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-            <div class="form-group">
-                <label>Author / Source *</label>
-                <input type="text" id="author" placeholder="e.g., Ahmed (2017)">
-            </div>
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" id="title" placeholder="e.g., Living a Feminist Life">
-            </div>
+            <label>Entry Type</label>
+            <select id="type">
+                <option value="Journal Article">Journal Article</option>
+                <option value="Book Chapter">Book Chapter</option>
+                <option value="GoodNotes / Paper Note">GoodNotes / Paper Note</option>
+                <option value="Past Assignment">Past Assignment</option>
+                <option value="Raw Reflection">Raw Reflection</option>
+            </select>
         </div>
 
         <div class="form-group">
-            <label>Key Quote (Direct Copy)</label>
-            <textarea id="quote" style="height:80px"></textarea>
+            <label>Author / Source Name</label>
+            <input type="text" id="author" placeholder="e.g., Smith (2024)">
         </div>
 
         <div class="form-group">
-            <label>My Reading / Analysis</label>
-            <textarea id="meaning" style="height:80px"></textarea>
+            <label>Title / Topic</label>
+            <input type="text" id="title" placeholder="e.g., Women in Leadership Dynamics">
         </div>
 
         <div class="form-group">
-            <label>Paper Seed (Draft Sentence)</label>
-            <textarea id="seed" placeholder="A sentence you might use in a paper..."></textarea>
+            <label>Cloud Link (Drive/OneDrive)</label>
+            <input type="url" id="externalLink" placeholder="Paste link here...">
         </div>
 
         <div class="form-group">
-            <label>Lenses</label>
+            <label>Direct Quote / Key Content</label>
+            <textarea id="quote" style="height:120px" placeholder="Essential text..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>My Synthesis / Analysis</label>
+            <textarea id="meaning" style="height:120px" placeholder="How does this support your RQ?"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Thematic Lenses</label>
             <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:5px">
-                <label style="font-size:0.7rem"><input type="checkbox" class="lens" value="Identity"> Identity</label>
-                <label style="font-size:0.7rem"><input type="checkbox" class="lens" value="Agency"> Agency</label>
-                <label style="font-size:0.7rem"><input type="checkbox" class="lens" value="Intersectionality"> Intersectionality</label>
-                <label style="font-size:0.7rem"><input type="checkbox" class="lens" value="Norms"> Norms</label>
+                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Identity"> Identity</label>
+                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Agency"> Agency</label>
+                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Intersectionality"> Intersectionality</label>
+                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Institutional"> Institutional</label>
             </div>
         </div>
 
-        <button class="btn btn-gold" style="width:100%; padding:12px; margin-top:10px" onclick="saveNote()">Save Entry</button>
+        <button class="btn btn-gold" style="width:100%; padding:15px; margin-top:10px" onclick="saveNote()">Save to Hub</button>
     </div>
 
     <div class="notes-panel">
-        <h3 style="font-family:'Cormorant Garamond', serif; margin-bottom:20px; border-bottom:1px solid var(--cream-dark)">Saved Notes (<span id="count">0</span>)</h3>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom: 2px solid var(--border); padding-bottom: 10px;">
+            <h2 style="font-family:'Cormorant Garamond', serif; color: var(--royal-blue)">Research Archive</h2>
+            <span id="count" style="font-size:0.8rem; font-weight:800; color:var(--gold-bright); background: var(--royal-blue); padding: 4px 12px; border-radius: 20px;">0 ENTRIES</span>
+        </div>
         <div id="notesContainer"></div>
     </div>
 </div>
 
 <div class="modal-overlay" id="modal">
     <div class="modal">
-        <h2 style="font-family:'Cormorant Garamond', serif">Export Data</h2>
-        <p style="font-size:0.8rem; color:var(--muted)">Copy this JSON data for backup or move to Word.</p>
-        <textarea class="export-area" id="exportContent" readonly></textarea>
-        <div style="display:flex; gap:10px">
-            <button class="btn btn-gold" onclick="copyData()">Copy to Clipboard</button>
-            <button class="btn btn-outline" style="color:var(--dark)" onclick="document.getElementById('modal').classList.remove('open')">Close</button>
-            <button class="btn btn-danger" onclick="clearData()">Clear All Data</button>
+        <h3 style="color: var(--royal-blue)">System Backup</h3>
+        <p style="font-size:0.8rem; color:var(--muted); margin: 10px 0;">Copy this code to back up your data locally.</p>
+        <textarea style="width:100%; height:200px; padding:10px; font-family:monospace; font-size:0.8rem;" id="exportContent" readonly></textarea>
+        <div style="display:flex; gap:10px; margin-top:15px">
+            <button class="btn btn-gold" onclick="copyData()">Copy Text</button>
+            <button class="btn" style="background:#eee" onclick="closeModal()">Close</button>
+            <button class="btn" style="color:red; font-size:0.7rem" onclick="clearData()">Wipe All Data</button>
         </div>
     </div>
 </div>
 
 <script>
-    let notes = JSON.parse(localStorage.getItem('diss_notes')) || [];
+    let notes = JSON.parse(localStorage.getItem('diss_hub_royal')) || [];
 
     function saveNote() {
         const author = document.getElementById('author').value;
-        if(!author) return alert("Please enter an author.");
-
+        if(!author) return alert("Please enter a source.");
         const note = {
             id: Date.now(),
+            type: document.getElementById('type').value,
             author,
             title: document.getElementById('title').value,
+            link: document.getElementById('externalLink').value,
             quote: document.getElementById('quote').value,
             meaning: document.getElementById('meaning').value,
-            seed: document.getElementById('seed').value,
             lenses: Array.from(document.querySelectorAll('.lens:checked')).map(el => el.value),
             date: new Date().toLocaleDateString()
         };
-
         notes.unshift(note);
-        localStorage.setItem('diss_notes', JSON.stringify(notes));
+        localStorage.setItem('diss_hub_royal', JSON.stringify(notes));
         renderNotes();
         clearForm();
     }
 
     function renderNotes() {
         const container = document.getElementById('notesContainer');
-        document.getElementById('count').innerText = notes.length;
+        document.getElementById('count').innerText = `${notes.length} ENTRIES`;
         container.innerHTML = notes.map(n => `
             <div class="note-card">
-                <div class="note-source">${n.author} ${n.title ? ' — ' + n.title : ''}</div>
-                ${n.quote ? `<div class="note-quote">"${n.quote}"</div>` : ''}
-                <div style="font-size:0.8rem; margin-top:8px"><strong>Analysis:</strong> ${n.meaning}</div>
-                <div style="margin-top:10px">
-                    ${n.lenses.map(l => `<span class="note-lens-pill">${l}</span>`).join('')}
+                <div class="note-header">
+                    <span class="note-type-tag">${n.type}</span>
+                    <span style="font-size:0.7rem; color:var(--muted); font-weight:700">${n.date}</span>
                 </div>
-                <div style="font-size:0.6rem; color:var(--muted); margin-top:10px">${n.date}</div>
+                <div class="note-source">${n.author}${n.title ? ': ' + n.title : ''}</div>
+                ${n.link ? `<a href="${n.link}" target="_blank" class="link-badge">View Source Link ↗</a>` : ''}
+                ${n.quote ? `<div class="note-quote">${n.quote}</div>` : ''}
+                <div style="font-size:0.9rem; margin-top:12px; line-height:1.6">
+                    <strong style="color:var(--royal-blue)">Analysis:</strong> ${n.meaning}
+                </div>
+                <div>${n.lenses.map(l => `<span class="pill">${l}</span>`).join('')}</div>
             </div>
         `).join('');
     }
 
     function clearForm() {
-        ['author','title','quote','meaning','seed'].forEach(id => document.getElementById(id).value = '');
+        ['author','title','quote','meaning','externalLink'].forEach(id => document.getElementById(id).value = '');
         document.querySelectorAll('.lens').forEach(el => el.checked = false);
     }
 
@@ -295,24 +194,21 @@
         document.getElementById('modal').classList.add('open');
         document.getElementById('exportContent').value = JSON.stringify(notes, null, 2);
     }
-
+    function closeModal() { document.getElementById('modal').classList.remove('open'); }
     function copyData() {
         document.getElementById('exportContent').select();
         document.execCommand('copy');
-        alert("Data copied!");
+        alert("Copied!");
     }
-
     function clearData() {
         if(confirm("Permanently delete all notes?")) {
             notes = [];
-            localStorage.removeItem('diss_notes');
+            localStorage.removeItem('diss_hub_royal');
             renderNotes();
-            document.getElementById('modal').classList.remove('open');
+            closeModal();
         }
     }
-
     renderNotes();
 </script>
-
 </body>
 </html>
