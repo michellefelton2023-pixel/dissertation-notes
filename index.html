@@ -38,6 +38,8 @@
         label { font-size: 0.7rem; text-transform: uppercase; color: var(--royal-blue); font-weight: 800; letter-spacing: 0.06em; }
         input, textarea, select { padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; background: var(--cream-bg); font-size: 0.9rem; }
         
+        #otherTypeContainer { display: none; margin-top: -10px; margin-bottom: 14px; }
+
         .lens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 5px; background: #f0f4f8; padding: 10px; border-radius: 8px; }
         .lens-option { font-size: 0.75rem; display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 500; }
 
@@ -48,7 +50,8 @@
         .note-quote { background: #f0f4f8; border-left: 3px solid var(--gold-bright); padding: 14px; font-style: italic; margin: 12px 0; font-size: 0.95rem; color: #334455; line-height: 1.5; }
         
         .pill { display: inline-block; background: rgba(0, 35, 102, 0.08); color: var(--royal-blue); font-size: 0.65rem; padding: 2px 10px; border-radius: 4px; margin-right: 6px; margin-top: 10px; font-weight: 700; border: 1px solid rgba(0, 35, 102, 0.1); }
-        .link-badge { display: inline-block; margin-top: 10px; font-size: 0.75rem; color: var(--royal-blue); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--gold-bright); }
+        .link-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 0.8rem; color: var(--royal-blue); text-decoration: none; font-weight: 700; padding: 6px 12px; background: #FFF9E6; border: 1px solid var(--gold-bright); border-radius: 6px; transition: 0.2s; }
+        .link-badge:hover { background: var(--gold-bright); color: var(--white); }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,35,102,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.open { display: flex; }
@@ -74,42 +77,49 @@
     <div class="entry-panel">
         <div class="form-group">
             <label>Entry Type</label>
-            <select id="type">
+            <select id="type" onchange="toggleOtherType()">
                 <option value="Journal Article">Journal Article</option>
                 <option value="Book Chapter">Book Chapter</option>
+                <option value="Media (YouTube/Video)">Media (YouTube/Video)</option>
                 <option value="GoodNotes / Paper Note">GoodNotes / Paper Note</option>
                 <option value="Past Assignment">Past Assignment</option>
                 <option value="Raw Reflection">Raw Reflection</option>
+                <option value="Other">Other...</option>
             </select>
+        </div>
+
+        <div class="form-group" id="otherTypeContainer">
+            <label>Specify Type</label>
+            <input type="text" id="otherTypeInput" placeholder="e.g., Podcast, Guest Lecture">
         </div>
 
         <div class="form-group">
             <label>Author / Source Name</label>
-            <input type="text" id="author" placeholder="e.g., Ahmed (2017)">
+            <input type="text" id="author" placeholder="e.g., The 70s Show / Ahmed (2017)">
         </div>
 
         <div class="form-group">
             <label>Title / Topic</label>
-            <input type="text" id="title" placeholder="e.g., Leadership Identity">
+            <input type="text" id="title" placeholder="e.g., Scene on Gender Roles">
         </div>
 
         <div class="form-group">
-            <label>Cloud Link (Drive/OneDrive)</label>
-            <input type="url" id="externalLink" placeholder="Paste link here...">
+            <label>Resource Link (YouTube, Drive, etc.)</label>
+            <input type="url" id="externalLink" placeholder="https://youtube.com/watch?v=...">
         </div>
 
         <div class="form-group">
-            <label>Direct Quote / Key Content</label>
-            <textarea id="quote" style="height:100px" placeholder="Quote from source..."></textarea>
+            <label>Key Content / Scene Description</label>
+            <textarea id="quote" style="height:100px" placeholder="Describe the scene or paste a quote..."></textarea>
         </div>
 
         <div class="form-group">
             <label>My Synthesis / Analysis</label>
-            <textarea id="meaning" style="height:100px" placeholder="Your critical thoughts..."></textarea>
+            <textarea id="meaning" style="height:100px" placeholder="Why is this relevant to your research?"></textarea>
         </div>
 
         <div class="form-group">
-            <label>Theoretical Lenses (Check all that apply)</label>
+            <label>Theoretical Lenses</label>
             <div class="lens-grid">
                 <label class="lens-option"><input type="checkbox" class="lens" value="Identity"> Identity</label>
                 <label class="lens-option"><input type="checkbox" class="lens" value="Feminist"> Feminist</label>
@@ -148,14 +158,26 @@
 </div>
 
 <script>
-    let notes = JSON.parse(localStorage.getItem('diss_final_v2')) || [];
+    let notes = JSON.parse(localStorage.getItem('diss_final_v4')) || [];
+
+    function toggleOtherType() {
+        const typeSelect = document.getElementById('type');
+        const otherContainer = document.getElementById('otherTypeContainer');
+        otherContainer.style.display = (typeSelect.value === 'Other') ? 'flex' : 'none';
+    }
 
     function saveNote() {
         const author = document.getElementById('author').value;
-        if(!author) return alert("Please enter a source.");
+        if(!author) return alert("Please enter a source name.");
+        
+        let finalType = document.getElementById('type').value;
+        if(finalType === 'Other') {
+            finalType = document.getElementById('otherTypeInput').value || 'Other';
+        }
+
         const note = {
             id: Date.now(),
-            type: document.getElementById('type').value,
+            type: finalType,
             author,
             title: document.getElementById('title').value,
             link: document.getElementById('externalLink').value,
@@ -165,7 +187,7 @@
             date: new Date().toLocaleDateString()
         };
         notes.unshift(note);
-        localStorage.setItem('diss_final_v2', JSON.stringify(notes));
+        localStorage.setItem('diss_final_v4', JSON.stringify(notes));
         renderNotes();
         clearForm();
     }
@@ -173,25 +195,35 @@
     function renderNotes() {
         const container = document.getElementById('notesContainer');
         document.getElementById('count').innerText = `${notes.length} ENTRIES`;
-        container.innerHTML = notes.map(n => `
+        container.innerHTML = notes.map(n => {
+            let linkLabel = "View Resource";
+            if (n.link.includes('youtube.com') || n.link.includes('youtu.be')) linkLabel = "▶ Watch on YouTube";
+            if (n.link.includes('drive.google.com')) linkLabel = "📄 View in Drive";
+            
+            return `
             <div class="note-card">
                 <div class="note-header">
                     <span class="note-type-tag">${n.type}</span>
                     <span style="font-size:0.7rem; color:var(--muted); font-weight:700">${n.date}</span>
                 </div>
                 <div class="note-source">${n.author}${n.title ? ': ' + n.title : ''}</div>
-                ${n.link ? `<a href="${n.link}" target="_blank" class="link-badge">Original Link ↗</a>` : ''}
+                
+                ${n.link ? `<a href="${n.link}" target="_blank" class="link-badge">${linkLabel} ↗</a>` : ''}
+                
                 ${n.quote ? `<div class="note-quote">"${n.quote}"</div>` : ''}
+                
                 <div style="font-size:0.9rem; margin-top:12px; line-height:1.6">
                     <strong style="color:var(--royal-blue)">Analysis:</strong> ${n.meaning}
                 </div>
                 <div>${n.lenses.map(l => `<span class="pill">${l}</span>`).join('')}</div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     function clearForm() {
-        ['author','title','quote','meaning','externalLink'].forEach(id => document.getElementById(id).value = '');
+        ['author','title','quote','meaning','externalLink','otherTypeInput'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('type').value = 'Journal Article';
+        document.getElementById('otherTypeContainer').style.display = 'none';
         document.querySelectorAll('.lens').forEach(el => el.checked = false);
     }
 
@@ -203,12 +235,12 @@
     function copyData() {
         document.getElementById('exportContent').select();
         document.execCommand('copy');
-        alert("Copied!");
+        alert("Backup copied!");
     }
     function clearData() {
         if(confirm("Wipe all data?")) {
             notes = [];
-            localStorage.removeItem('diss_final_v2');
+            localStorage.removeItem('diss_final_v4');
             renderNotes();
             closeModal();
         }
