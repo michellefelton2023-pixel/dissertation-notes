@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dissertation Research Hub</title>
-   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
 
         :root {
             --royal-blue: #002366;
-            --royal-deep: #001a4d;
-            --royal-light: #003399;
-            --gold: #C4956A;
             --gold-bright: #D4AF37;
             --cream-bg: #F8F9FA;
             --border: #DDE2E8;
@@ -30,7 +28,6 @@
         
         .btn { padding: 8px 16px; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; font-family: inherit; }
         .btn-gold { background: var(--gold-bright); color: var(--royal-blue); font-weight: 700; }
-        .btn-gold:hover { background: #eac04d; transform: translateY(-1px); }
         .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.4); }
 
         .main-layout { display: grid; grid-template-columns: 450px 1fr; gap: 0; min-height: calc(100vh - 75px); }
@@ -39,17 +36,20 @@
 
         .form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
         label { font-size: 0.7rem; text-transform: uppercase; color: var(--royal-blue); font-weight: 800; letter-spacing: 0.06em; }
-        input, textarea, select { padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; background: var(--cream-bg); }
-        input:focus, textarea:focus { outline: 2px solid var(--gold-bright); border-color: transparent; }
+        input, textarea, select { padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; background: var(--cream-bg); font-size: 0.9rem; }
         
+        .lens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 5px; background: #f0f4f8; padding: 10px; border-radius: 8px; }
+        .lens-option { font-size: 0.75rem; display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 500; }
+
         .note-card { background: white; border: 1px solid var(--border); padding: 22px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border-left: 5px solid var(--royal-blue); }
         .note-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
         .note-type-tag { font-size: 0.65rem; background: var(--royal-blue); color: var(--white); padding: 3px 10px; border-radius: 3px; text-transform: uppercase; font-weight: 600; }
         .note-source { font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--royal-blue); font-size: 1.3rem; }
-        .note-quote { background: #f0f4f8; border-left: 3px solid var(--gold-bright); padding: 14px; font-style: italic; margin: 12px 0; font-size: 0.95rem; color: #334455; }
-        .link-badge { display: inline-block; margin-top: 10px; font-size: 0.75rem; color: var(--royal-blue); text-decoration: none; font-weight: 700; padding: 4px 8px; background: rgba(212, 175, 55, 0.1); border-radius: 4px; }
+        .note-quote { background: #f0f4f8; border-left: 3px solid var(--gold-bright); padding: 14px; font-style: italic; margin: 12px 0; font-size: 0.95rem; color: #334455; line-height: 1.5; }
         
-        .pill { display: inline-block; border: 1px solid var(--gold-bright); color: var(--royal-blue); font-size: 0.65rem; padding: 2px 10px; border-radius: 4px; margin-right: 6px; margin-top: 10px; font-weight: 600; }
+        .pill { display: inline-block; background: rgba(0, 35, 102, 0.08); color: var(--royal-blue); font-size: 0.65rem; padding: 2px 10px; border-radius: 4px; margin-right: 6px; margin-top: 10px; font-weight: 700; border: 1px solid rgba(0, 35, 102, 0.1); }
+        .link-badge { display: inline-block; margin-top: 10px; font-size: 0.75rem; color: var(--royal-blue); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--gold-bright); }
+
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,35,102,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.open { display: flex; }
         .modal { background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; border-top: 10px solid var(--gold-bright); }
@@ -85,12 +85,12 @@
 
         <div class="form-group">
             <label>Author / Source Name</label>
-            <input type="text" id="author" placeholder="e.g., Smith (2024)">
+            <input type="text" id="author" placeholder="e.g., Ahmed (2017)">
         </div>
 
         <div class="form-group">
             <label>Title / Topic</label>
-            <input type="text" id="title" placeholder="e.g., Women in Leadership Dynamics">
+            <input type="text" id="title" placeholder="e.g., Leadership Identity">
         </div>
 
         <div class="form-group">
@@ -100,25 +100,29 @@
 
         <div class="form-group">
             <label>Direct Quote / Key Content</label>
-            <textarea id="quote" style="height:120px" placeholder="Essential text..."></textarea>
+            <textarea id="quote" style="height:100px" placeholder="Quote from source..."></textarea>
         </div>
 
         <div class="form-group">
             <label>My Synthesis / Analysis</label>
-            <textarea id="meaning" style="height:120px" placeholder="How does this support your RQ?"></textarea>
+            <textarea id="meaning" style="height:100px" placeholder="Your critical thoughts..."></textarea>
         </div>
 
         <div class="form-group">
-            <label>Thematic Lenses</label>
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:5px">
-                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Identity"> Identity</label>
-                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Agency"> Agency</label>
-                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Intersectionality"> Intersectionality</label>
-                <label style="font-size:0.75rem"><input type="checkbox" class="lens" value="Institutional"> Institutional</label>
+            <label>Theoretical Lenses (Check all that apply)</label>
+            <div class="lens-grid">
+                <label class="lens-option"><input type="checkbox" class="lens" value="Identity"> Identity</label>
+                <label class="lens-option"><input type="checkbox" class="lens" value="Feminist"> Feminist</label>
+                <label class="lens-option"><input type="checkbox" class="lens" value="Intersectionality"> Intersectionality</label>
+                <label class="lens-option"><input type="checkbox" class="lens" value="Agency"> Agency</label>
+                <label class="lens-option"><input type="checkbox" class="lens" value="Critical Theory"> Critical Theory</label>
+                <label class="lens-option"><input type="checkbox" class="lens" value="Organizational Norms"> Org. Norms</label>
+                <label class="lens-option"><input type="checkbox" class="lens" value="Decolonial Systems"> Decolonial</label>
+                <label class="lens-option"><input type="checkbox" class="lens" value="Leadership"> Leadership</label>
             </div>
         </div>
 
-        <button class="btn btn-gold" style="width:100%; padding:15px; margin-top:10px" onclick="saveNote()">Save to Hub</button>
+        <button class="btn btn-gold" style="width:100%; padding:15px; margin-top:10px" onclick="saveNote()">Save to Research Hub</button>
     </div>
 
     <div class="notes-panel">
@@ -133,18 +137,18 @@
 <div class="modal-overlay" id="modal">
     <div class="modal">
         <h3 style="color: var(--royal-blue)">System Backup</h3>
-        <p style="font-size:0.8rem; color:var(--muted); margin: 10px 0;">Copy this code to back up your data locally.</p>
+        <p style="font-size:0.8rem; color:var(--muted); margin: 10px 0;">Backup your JSON data here regularly.</p>
         <textarea style="width:100%; height:200px; padding:10px; font-family:monospace; font-size:0.8rem;" id="exportContent" readonly></textarea>
         <div style="display:flex; gap:10px; margin-top:15px">
             <button class="btn btn-gold" onclick="copyData()">Copy Text</button>
             <button class="btn" style="background:#eee" onclick="closeModal()">Close</button>
-            <button class="btn" style="color:red; font-size:0.7rem" onclick="clearData()">Wipe All Data</button>
+            <button class="btn" style="color:red; font-size:0.7rem" onclick="clearData()">Clear All</button>
         </div>
     </div>
 </div>
 
 <script>
-    let notes = JSON.parse(localStorage.getItem('diss_hub_royal')) || [];
+    let notes = JSON.parse(localStorage.getItem('diss_final_v2')) || [];
 
     function saveNote() {
         const author = document.getElementById('author').value;
@@ -161,7 +165,7 @@
             date: new Date().toLocaleDateString()
         };
         notes.unshift(note);
-        localStorage.setItem('diss_hub_royal', JSON.stringify(notes));
+        localStorage.setItem('diss_final_v2', JSON.stringify(notes));
         renderNotes();
         clearForm();
     }
@@ -176,8 +180,8 @@
                     <span style="font-size:0.7rem; color:var(--muted); font-weight:700">${n.date}</span>
                 </div>
                 <div class="note-source">${n.author}${n.title ? ': ' + n.title : ''}</div>
-                ${n.link ? `<a href="${n.link}" target="_blank" class="link-badge">View Source Link ↗</a>` : ''}
-                ${n.quote ? `<div class="note-quote">${n.quote}</div>` : ''}
+                ${n.link ? `<a href="${n.link}" target="_blank" class="link-badge">Original Link ↗</a>` : ''}
+                ${n.quote ? `<div class="note-quote">"${n.quote}"</div>` : ''}
                 <div style="font-size:0.9rem; margin-top:12px; line-height:1.6">
                     <strong style="color:var(--royal-blue)">Analysis:</strong> ${n.meaning}
                 </div>
@@ -202,9 +206,9 @@
         alert("Copied!");
     }
     function clearData() {
-        if(confirm("Permanently delete all notes?")) {
+        if(confirm("Wipe all data?")) {
             notes = [];
-            localStorage.removeItem('diss_hub_royal');
+            localStorage.removeItem('diss_final_v2');
             renderNotes();
             closeModal();
         }
